@@ -1,4 +1,6 @@
 import './App.css';
+import {Usery} from './User';
+import {Planet} from './Planet';
 
 function App() {
   const name = "Victoria";
@@ -8,6 +10,20 @@ function App() {
   const isGreen = true;
 
   const names = ["Harvey", "Mike", "Jessica", "Loius", "Donna"];
+  const users = [
+    {name: "Specter", age: 40},
+    {name: "Pearson", age: 45},
+    {name: "Ross", age: 25},
+  ];
+
+  const planets = [
+    {name: "Mars", isGasPlanet: false},
+    {name: "Earth", isGasPlanet: false},
+    {name: "Jupiter", isGasPlanet: true},
+    {name: "Venus", isGasPlanet: false},
+    {name: "Neptune", isGasPlanet: true},
+    {name: "Uranus", isGasPlanet: true},
+  ];
 
   return (
     <div className="App">
@@ -21,14 +37,29 @@ function App() {
 
       {isGreen && <button>IsGreen is true.</button>}
 
-      <hr/>
       {/* rendering list */}
+      <hr/>
       {names.map((name, key) => {
         return <h1 key={key}> {key+1}. {name}</h1>;
       })}
 
+      {/* using another file for your component */}
+      <hr/>
+      {users.map((user, key) => {
+        return <Usery name={user.name} age={user.age} key={key}/>
+      })}
 
-      {/* component and props */}
+      {/* planet exercise */}
+      <hr/>
+      {planets.map((planet, key) => {
+        if(planet.isGasPlanet) return <Planet name={planet.name} key={key}/>
+      })}
+      {/* or */}
+      {planets.map((planet, key) => planet.isGasPlanet && <Planet name={planet.name} key={key}/>)}
+
+
+
+      {/* component and props = works with the components in this same file */}
       <hr/>
       <User name="Victoria" age={21} email="victoria@gmail.com"/>
       <User name="Peter" age={19} email="peter@gmail.com"/>
@@ -40,6 +71,8 @@ function App() {
   );
 }
 
+
+// same file component
 const User = (props) => {
   return (
     <div>
