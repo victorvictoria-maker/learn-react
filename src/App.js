@@ -1,6 +1,7 @@
 import './App.css';
 import {Usery} from './User';
 import {Planet} from './Planet';
+import { useState } from 'react';
 
 function App() {
   const name = "Victoria";
@@ -24,6 +25,52 @@ function App() {
     {name: "Neptune", isGasPlanet: true},
     {name: "Uranus", isGasPlanet: true},
   ];
+
+
+  let [age, setAge] = useState(0);
+  const increaseAge = () => {
+    // age++;
+    // console.log(age);
+    setAge(age+1);
+  }
+
+
+  let [input, setInput] = useState("");
+  const showInputValue = (event) => {
+    setInput(event.target.value);
+  };
+
+
+  let [showText, setShowText] = useState(true);
+  const toggleText = () => {
+    setShowText(!showText);
+  };
+
+  let [color, setColor] = useState("purple");
+  const changeColour = () => {
+    // if(color === "purple") {
+    //   setColor("green");
+    // } else {
+    //   setColor("purple");
+    // }
+    setColor(color === "purple" ? "green" : "purple");
+  };
+
+
+
+  let [count, setCount] = useState(0);
+
+  const increaseCount = () => {
+    setCount(count+1);
+  };
+
+  const decreaseCount = () => {
+    setCount(count-1);
+  };
+
+  const countToZero = () => {
+    setCount(0);
+  };
 
   return (
     <div className="App">
@@ -56,6 +103,33 @@ function App() {
       })}
       {/* or */}
       {planets.map((planet, key) => planet.isGasPlanet && <Planet name={planet.name} key={key}/>)}
+
+
+      {/* function with useState Hook*/}
+      <hr/>
+      {age}
+      <button onClick={increaseAge}>Increase Age</button>
+
+      <input type='text' onChange={showInputValue}/>
+      {input}
+
+      <div>
+        <button onClick={toggleText}>Show/Hide</button>
+        {showText && <p>My name is vicky.</p>}
+      </div>
+
+      <div>
+        <button onClick={changeColour}>Change colour</button>
+        <h2 style={{color: color}}>Vicky.</h2>
+      </div>
+
+      {/* useState Hook counter exercise */}
+      <h2>Simple Counter</h2>
+      <button onClick={increaseCount}>Increase</button>
+      <button onClick={decreaseCount}>Decrease</button>
+      <button onClick={countToZero}>Set To Zero</button>
+      {count}
+
 
 
 
